@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../CSS/InGame.css">
+    <title>テトリス</title>
+
+    <div class="canvas">
+        <div class="main">
+            <canvas id="mainCanvas"></canvas>
+        </div>
+        <div class="side">
+            <canvas id="holdCanvas"></canvas>
+            <canvas id="nextCanvas"></canvas>
+        </div>
+    </div>
+    <script src="../JavaScript/jquery-3.7.1.min.js"></script>
+    <script src="../JavaScript/Constants.js"></script>
+    <script src="../JavaScript/Functions.js"></script>
+    <script src="../JavaScript/InGameController.js"></script>
+</head>
+
+<body>
+    <p>←→で左右に移動<br>
+    ↑で一番下まで移動<br>
+    ↓で早く落下<br>
+    Spaceで回転<br>
+    ShiftでHold</p>
+</body>
+
+</html>
