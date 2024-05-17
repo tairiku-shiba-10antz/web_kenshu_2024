@@ -88,3 +88,22 @@ const START_POS_Y = 0;
 const TITLE_MAIN_CANVAS_WIDTH = 1200;
 const TITLE_MAIN_CANVAS_HEIGHT = 300;
 //#endregion
+
+//#region AudioData
+const BGM = new Audio('../Resource/BGM/tetrisBGM.mp3');
+const MAX_BGM_SPEED = 2;
+BGM.loop = true;
+
+const rotateSE = new Audio('../Resource/SE/rotateSE.mp3');
+const dropSE = new Audio('../Resource/SE/dropSE.mp3');
+const completeLineSE = new Audio('../Resource/SE/completeLineSE.mp3');
+completeLineSE.volume = 0.5;
+//#endregion
+
+//#region SystemData
+const DEFAULT_GAME_SPEED = 500;
+const MAX_GAME_SPEED = 150;
+const UP_GAME_SPEED = 50;
+
+const SPEEDUP_INTERVAL = 5;
+//#endregion

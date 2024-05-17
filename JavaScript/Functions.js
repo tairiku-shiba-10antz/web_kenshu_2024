@@ -4,8 +4,10 @@ function Update() {
     if (gameOver || pause) {
         return;
     }
-
-    DropMino();
+    flameCount++;
+    if(flameCount % (gameSpeed / UP_GAME_SPEED) == 0) {
+        DropMino();
+    }
 }
 
 function SwitchPause() {
@@ -15,9 +17,18 @@ function SwitchPause() {
 }
 
 function DebugLogs() {
+    console.log(flameCount);
+    console.log(gameSpeed);
+    console.log(BGM.playbackRate);
     for(let i = 0; i < MINO_QUEUE_NUM; i++) {
         console.log(MINO_TYPES[minoTypeQueue[i]]);
     }
+}
+
+function InitAndPlaySE(SE) {
+    SE.pause();
+    SE.currentTime = 0;
+    SE.play();
 }
 //#endregion
 
@@ -28,6 +39,8 @@ function InitAll() {
     InitMino();
     DrawAll();
     gameOver = false;
+    BGM.playbackRate = 1;
+    flameCount = 0;
 }
 
 function InitField() {
@@ -217,7 +230,7 @@ function CheckLine() {
 
         if (flag) {
             lineCount++;
-
+            InitAndPlaySE(completeLineSE);
             for (let ny = y; ny > 0; ny--) {
                 for (let nx = 0; nx < FIELD_COLUMN; nx++) {
                     field[ny][nx] = field[ny - 1][nx];
@@ -257,6 +270,7 @@ function RotateMino() {
     }
 
     if (CheckMove(0, 0, newMino)) {
+        InitAndPlaySE(rotateSE);
         currentMino = newMino;
     }
 }
@@ -288,12 +302,20 @@ function DropMino() {
 }
 
 function FixMino() {
+    InitAndPlaySE(dropSE);
     for (let y = 0; y < MINO_SIZE; y++) {
         for (let x = 0; x < MINO_SIZE; x++) {
             if (currentMino[y][x]) {
                 field[minoPosY + y][minoPosX + x] = currentMinoType;
             }
         }
+    }
+
+    fixCount++;
+
+    if (fixCount % SPEEDUP_INTERVAL == 0 && gameSpeed > MAX_GAME_SPEED) {
+        gameSpeed -= UP_GAME_SPEED;
+        BGM.playbackRate = 1 + (fixCount / SPEEDUP_INTERVAL) / ((DEFAULT_GAME_SPEED - MAX_GAME_SPEED) / UP_GAME_SPEED) * (MAX_BGM_SPEED - 1);
     }
 }
 //#endregion

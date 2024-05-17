@@ -1,5 +1,5 @@
 //#region Variable Declaration
-let gameSpeed = 500;
+let gameSpeed = DEFAULT_GAME_SPEED;
 
 let mainCanvas = document.getElementById("mainCanvas");
 let mainCanvasContext = mainCanvas.getContext("2d");
@@ -30,12 +30,15 @@ let minoPosY = START_POS_Y;
 
 let pause = false;
 let gameOver = false;
+
+let flameCount = 0;
+let fixCount = 0;
 //#endregion
 
 //#region Processing
 $(document).ready(InitAll());
 
-$(setInterval(Update, gameSpeed));
+$(setInterval(Update, UP_GAME_SPEED));
 
 //#endregion
 
@@ -77,5 +80,9 @@ $(window).keydown(function (e) {
             break;
     }
     DrawAll();
+
+    if(BGM.paused) {
+        BGM.play();
+    }
 });
 //#endregion
