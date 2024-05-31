@@ -102,8 +102,8 @@ completeLineSE.volume = 0.5;
 
 //#region SystemData
 const DEFAULT_GAME_SPEED = 500;
-const MAX_GAME_SPEED = 150;
+const MAX_GAME_SPEED = 200;
 const UP_GAME_SPEED = 50;
 
-const SPEEDUP_INTERVAL = 5;
+const SPEEDUP_INTERVAL = 6;
 //#endregion
