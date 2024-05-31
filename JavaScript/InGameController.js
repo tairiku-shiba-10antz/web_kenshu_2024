@@ -17,6 +17,8 @@ let nextContext = nextCanvas.getContext("2d");
 nextCanvas.width = NEXT_CANVAS_WIDTH;
 nextCanvas.height = NEXT_CANVAS_HEIGHT;
 
+let lineCountCanvas = document.getElementById("lineCount");
+
 let field = [];
 
 let currentMinoType = Math.floor(Math.random() * (MINO_TYPES.length - 1)) + 1;
@@ -33,6 +35,7 @@ let gameOver = false;
 
 let flameCount = 0;
 let fixCount = 0;
+let lineCount = 0;
 //#endregion
 
 //#region Processing
@@ -78,11 +81,10 @@ $(window).keydown(function (e) {
         case "Shift":
             HoldMino();
             break;
+        case "r":
+            InitAll();
+            break;
     }
     DrawAll();
-
-    if(BGM.paused) {
-        BGM.play();
-    }
 });
 //#endregion

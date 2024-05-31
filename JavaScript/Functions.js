@@ -25,7 +25,7 @@ function DebugLogs() {
     }
 }
 
-function InitAndPlaySE(SE) {
+function InitAndPlaySound(SE) {
     SE.pause();
     SE.currentTime = 0;
     SE.play();
@@ -41,6 +41,8 @@ function InitAll() {
     gameOver = false;
     BGM.playbackRate = 1;
     flameCount = 0;
+    lineCount = 0;
+    InitAndPlaySound(BGM);
 }
 
 function InitField() {
@@ -119,6 +121,8 @@ function DrawField() {
             }
         }
     }
+
+    lineCountCanvas.textContent = lineCount + "Line";
 }
 
 function DrawMino() {
@@ -218,7 +222,6 @@ function CheckMove(mx, my, newMino) {
 }
 
 function CheckLine() {
-    let lineCount = 0;
     for (let y = 0; y < FIELD_ROW; y++) {
         let flag = true;
         for (let x = 0; x < FIELD_COLUMN; x++) {
@@ -230,7 +233,7 @@ function CheckLine() {
 
         if (flag) {
             lineCount++;
-            InitAndPlaySE(completeLineSE);
+            InitAndPlaySound(completeLineSE);
             for (let ny = y; ny > 0; ny--) {
                 for (let nx = 0; nx < FIELD_COLUMN; nx++) {
                     field[ny][nx] = field[ny - 1][nx];
@@ -270,7 +273,7 @@ function RotateMino() {
     }
 
     if (CheckMove(0, 0, newMino)) {
-        InitAndPlaySE(rotateSE);
+        InitAndPlaySound(rotateSE);
         currentMino = newMino;
     }
 }
@@ -302,7 +305,7 @@ function DropMino() {
 }
 
 function FixMino() {
-    InitAndPlaySE(dropSE);
+    InitAndPlaySound(dropSE);
     for (let y = 0; y < MINO_SIZE; y++) {
         for (let x = 0; x < MINO_SIZE; x++) {
             if (currentMino[y][x]) {
